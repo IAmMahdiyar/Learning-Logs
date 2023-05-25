@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock title %} - Learning Logs</title>
+</head>
+<body>
+<nav style="padding-left: 20px;" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Learning Logs</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/topics">Topics</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/newtopic">New Topic</a>
+            </li>
+        </ul>
+        <div style="width: 85%; justify-content: right" class="navbar-nav nav-brand">
+            {% if user.is_authenticated %}
+                <div class="nav-item">
+                    <span style="margin-right: 5px; vertical-align: -webkit-baseline-middle">Hello, {{ user.username }}</span>
+                </div>
+                <div class="nav-item">
+                    <a style="margin-left: 5px" class="btn btn-outline-primary"
+                       href="/accounts/logout">Log Out</a>
+                </div>
+            {% else %}
+                <div class="nav-item">
+                    <a class="btn btn-primary" href="/accounts/login">Login</a>
+                </div>
+                <div class="nav-item">
+                    <a style="margin-left: 5px" class="btn btn-outline-primary"
+                       href="/accounts/signup">SignUp</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<main class="row">
+    <div class="container-fluid" style="padding: 30px">
+
+        <div class="pb-2 mb-2 border-bottom">
+            {% block header %}{% endblock header %}
+        </div>
+
+        {% block content %}{% endblock content %}
+    </div>
+</main>
+
+
+
+<footer style="position:absolute;: relative; bottom: 10px; width: 100%">
+    <p style="text-align: center; display: block; width: 100%">The Right to this Website is Copy Righted to Learning
+        Logs</p>
+</footer>
+</body>
+</html>

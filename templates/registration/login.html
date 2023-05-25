@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock title %}
+
+{% load django_bootstrap5 %}
+
+{% block header %} <h2>Login to Learning Logs</h2> {% endblock header %}
+
+{% block content %}
+    {% if form.errors %}
+        <p>Username or Password is Invalid</p>
+    {% endif %}
+
+    <form action="{% url 'accounts:login' %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %} Topics {% endblock title %}
+
+{% block header %} <h2>{{ user.username }}'s Topics</h2> {% endblock header %}
+
+{% block content %}
+    {% for item in topics %}
+        <div class="card mb-3">
+            <p style="font-size: 18px" class="card-header">
+                {{ item.text }}
+            </p>
+            <div class="card-body">
+                Created at {{ item.date_added|date:'M d, Y H:i' }} By {{ item.owner.username }}
+                <br>
+                <a style="margin-top: 10px" class="btn btn-primary" href="/topic/{{ item.text }}">View Entries</a>
+            </div>
+
+        </div>
+    {% endfor %}
+{% endblock content %}
